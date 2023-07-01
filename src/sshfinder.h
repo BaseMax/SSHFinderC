@@ -1,7 +1,8 @@
 #ifndef SSHFINDER_H
 #define SSHFINDER_H
+#include <stdbool.h>
 
-// Print help message
 static void usage(void);
+static bool validateCIDR(const char*);
 
 #endif // SSHFINDER_H
