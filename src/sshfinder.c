@@ -75,37 +75,3 @@ static void usage(void)
 "         BaseMax           <basemaxcode@gmail.com>\n"
     );
 }
-
-static bool validateCIDR(const char *cidr)
-{
-    // Splitting the CIDR into network and prefic length
-    char network[10];
-    int prefixLength;
-    sscanf(cidr, "%15[^/]/%d", network, &prefixLength);
-
-    // Validation condition
-    if (prefixLength < 0 || prefixLength > 32) {
-        return false; // Invalid prefix length
-    }
-
-    char *token;
-    char octet;
-
-    // Tokenizing network address using dot(.) delimiter
-    token = strtok(network, ".");
-    for (int i = 0; i < 4; i++) {
-        if (token == NULL)
-            return false;
-
-        octet = atoi(token);
-        if (octet < 0 || octet > 255)
-            return false;
-
-        token = strtok(network, ".");
-    }
-
-    if (token != NULL)
-        return false; // Extra component in network address
-    
-    return true;
-}
