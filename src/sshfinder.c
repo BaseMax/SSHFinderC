@@ -24,7 +24,8 @@ main(int argc, char *argv[])
     };
     
     int option;
-    while ((option = getopt_long(argc, argv, "hr:p:t:", long_options, NULL)) != -1) {
+    while ((option = getopt_long(argc, argv,
+                    "hr:p:t:", long_options, NULL)) != -1) {
         if (option == 'h') {
             help_flag = 1;
             break;
