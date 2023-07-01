@@ -16,11 +16,11 @@ main(int argc, char *argv[])
     int help_flag = 0;
 
     static struct option long_options[] = {
-        {"help"  ,   no_argument,       0, 'h'},
-        {"range" ,   required_argument, 0, 'r'},
-        {"port"  ,   required_argument, 0, 'p'},
-        {"thread",   required_argument, 0, 't'},
-        {0       ,   0                , 0,   0}
+        {"help"   ,   no_argument,       0, 'h'},
+        {"range"  ,   required_argument, 0, 'r'},
+        {"port"   ,   required_argument, 0, 'p'},
+        {"threads",   required_argument, 0, 't'},
+        {0        ,   0                , 0,   0}
     };
     
     int option;
