@@ -7,8 +7,8 @@
 
 #define MAX_RANGE_SIZE 100
 
-int
-main(int argc, char *argv[])
+
+int main(int argc, char *argv[])
 {
     char range[MAX_RANGE_SIZE];
     int port = 22;
@@ -74,4 +74,13 @@ static void usage(void)
 "Authors: Maximilian Edison <maximilianedison@gmail.com>\n"
 "         BaseMax           <basemaxcode@gmail.com>\n"
     );
+}
+
+
+void freemem(void **pp)
+{
+    if (pp != NULL && *pp != NULL) {
+        free(*pp);
+        *pp = NULL;
+    }
 }
