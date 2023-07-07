@@ -14,7 +14,7 @@
 
 static void usage(void);
 void freemem(void **pp);
-static int isValidIP(const char *ip);
+static bool isValidIP(const char *ip);
 static bool isIpAvailable(const char* ip, int port);
 static void proccessIPS(char **ips, int count, int port);
 

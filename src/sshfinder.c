@@ -44,12 +44,33 @@ main(int argc, char *argv[])
             case 'r':
                 char *ipToken = strtok(optarg, ",");
                 while (ipToken != NULL) {
+                    char *slashPos = strchr(ipToken, '/');
+                    if (slashPos != NULL) {
+                        if(!isValidIP(ipToken)) {
+                            fprintf(stderr,
+                                    "Invalid IP range %s\n",
+                                    ipToken);
+                            exit(EXIT_FAILURE);
+                        } else {
+                            
+                        }
+                    } else {
+                        if (!isValidIP(ipToken)) {
+                            fprintf(stderr,
+                                    "Invalid IP address %s\n",
+                                    ipToken);
+                            exit(EXIT_FAILURE);
+                        } else {
+                            ips[ipCount] = strdup(ipToken);
+                            ipCount++;
+                        }
+                    }
+
                     if (ipCount >= capacity) {
                         capacity *= 2;
                         ips = realloc(ips, capacity * sizeof(char *));
                     }
-                    ips[ipCount] = strdup(ipToken);
-                    ipCount++;
+
                     ipToken = strtok(NULL, ",");
                 }
                 break;
@@ -107,12 +128,12 @@ freemem(void **pp)
 
 
 static
-int isValidIP(const char *ip) {
+bool isValidIP(const char *ip) {
     struct sockaddr_in sa;
     int result = inet_pton(AF_INET, ip, &(sa.sin_addr));
 
     if (result == 1)
-        return 1;
+        return true;
     else if (result == 0) {
         char *slashPos = strchr(ip, '/');
         if (slashPos != NULL) {
@@ -123,17 +144,19 @@ int isValidIP(const char *ip) {
             if (isValidCIDR) {
                 int cidr = atoi(slashPos + 1);
                 if (cidr >= 0 && cidr <= 32) {
-                    return 1;
+                    return true;
                 }
             }
         }
     }
 
-    return 0;
+    return false;
 }
 
 
-bool isIpAvailable(const char* ip, int port) {
+bool 
+isIpAvailable(const char* ip, int port) 
+{
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
         perror("socket");
@@ -200,10 +223,6 @@ static
 void proccessIPS(char **ips, int count, int port)
 {
     for (int i = 0; i < count; i++) {
-	    if (!isValidIP(ips[i])) {
-		    printf("Invalid IP address: %s\n", ips[i]);
-		    exit(EXIT_FAILURE);
-	    }
         if (isIpAvailable(ips[i], port))
             printf("IP %s on %d is available\n", ips[i], port);
         else 
