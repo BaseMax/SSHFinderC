@@ -46,15 +46,31 @@ main(int argc, char *argv[])
             case 'r':
                 char *ipToken = strtok(optarg, ",");
                 while (ipToken != NULL) {
-                    char *slashPos = strchr(ipToken, '/');
-                    if (slashPos != NULL) {
+                    char *slash = strchr(ipToken, '/');
+                    if (slash != NULL) {
                         if(!isValidIP(ipToken)) {
                             fprintf(stderr,
                                     "Invalid IP range %s\n",
                                     ipToken);
                             exit(EXIT_FAILURE);
                         } else {
-                           // Implement handling of ip CIDR notation here
+                           *slash = '\0';
+    			           uint32_t ip = inet_addr(ipToken);
+    			           int netmask = atoi(slash + 1);
+                           uint32_t bitmask = (0xFFFFFFFFU << (32 - netmask));
+                           uint32_t startIP = ntohl(ip) & bitmask;
+                           uint32_t endIP = startIP | (~bitmask & 0xFFFFFFFFU);
+                           for (uint32_t i = startIP + 1; i < endIP; i++) {
+                                struct in_addr addr;
+                                addr.s_addr = htonl(i);
+                                char *ip_str = inet_ntoa(addr);
+                                ips[ipCount] = strdup(ip_str);
+                                ipCount++;
+                                if (ipCount >= capacity) {
+                                    capacity *= 2;
+                                    ips = realloc(ips, capacity * sizeof(char *));
+                                }
+                           }
                         }
                     } else {
                         if (!isValidIP(ipToken)) {
@@ -112,7 +128,7 @@ void usage(void)
 "\t-h     --help          Display the help message and usage information\n"
 "\t-r     --range         The ip range to scan (ex. 192.168.0.1/24,192.168.2.0/24)\n"
 "\t-p     --port          The port number to scan for SSH services (default is 22)\n"
-"\t-t     --threads       The number of concurrent therads to use for scanning (default is 10\n"
+"\t-t     --threads       The number of concurrent therads to use for scanning (default is 10)\n"
 "Authors: Maximilian Edison <maximilianedison@gmail.com>\n"
 "         BaseMax           <basemaxcode@gmail.com>\n"
     );
