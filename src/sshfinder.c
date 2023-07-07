@@ -128,7 +128,7 @@ void usage(void)
 "\t-h     --help          Display the help message and usage information\n"
 "\t-r     --range         The ip range to scan (ex. 192.168.0.1/24,192.168.2.0/24)\n"
 "\t-p     --port          The port number to scan for SSH services (default is 22)\n"
-"\t-t     --threads       The number of concurrent therads to use for scanning (default is 10)\n"
+"\t-t     --threads       The number of concurrent therads to use for scanning (default is 10) -> comming soon :)\n"
 "Authors: Maximilian Edison <maximilianedison@gmail.com>\n"
 "         BaseMax           <basemaxcode@gmail.com>\n"
     );
@@ -242,8 +242,8 @@ void proccessIPS(char **ips, int count, int port)
 {
     for (int i = 0; i < count; i++) {
         if (isIpAvailable(ips[i], port))
-            printf("IP %s on %d is available\n", ips[i], port);
+            printf("IP %s on port %d is available\n", ips[i], port);
         else 
-            printf("IP %s on %d is not available\n", ips[i], port);
+            printf("IP %s on port %d is not available\n", ips[i], port);
     }
 }

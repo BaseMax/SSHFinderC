@@ -29,7 +29,7 @@ To install and run the SSH System Finder, follow these steps:
 - Compile the C program using the C compiler. For example, using GCC:
 
 ```shell
-gcc ssh_system_finder.c -o ssh_system_finder
+make
 ```
 
 Run the program with the desired options and parameters. See the next section for available flags and their usage.
@@ -41,7 +41,7 @@ The SSH System Finder supports the following command-line flags:
 - `-h, --help`: Displays the help message and usage information.
 - `-r, --range`: Specifies the IP range or local network to scan. The format can be a single IP address, a range using CIDR notation (e.g., 192.168.1.0/24), or a combination of both (e.g., 192.168.1.0/24,192.168.2.0/24).
 - `-p, --port`: Specifies the port number to scan for SSH services (default is port 22).
-- `-t, --threads`: Specifies the number of concurrent threads to use for scanning (default is 10).
+- `-t, --threads`: Specifies the number of concurrent threads to use for scanning (default is 10) -> comming soon :).
 Here's an example command for scanning a local network (192.168.1.0/24) for SSH systems:
 
 ```shell
@@ -82,4 +82,4 @@ This project is licensed under the GPL-3.0 License.
 
 The SSH System Finder was inspired by the need to identify SSH-enabled systems within a network range efficiently.
 
-Copyright 2023, Max Base
+Copyright 2023, Max Base, MaximilianEdison
