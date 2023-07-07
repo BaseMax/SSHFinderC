@@ -1,4 +1,5 @@
 #include "sshfinder.h"
+
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,8 +12,6 @@
 #include <fcntl.h>
 #include <poll.h>
 #include <stdint.h>
-
-
 
 int 
 main(int argc, char *argv[])
@@ -119,7 +118,6 @@ main(int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 
-
 static 
 void usage(void)
 {
@@ -143,7 +141,6 @@ freemem(void **pp)
         *pp = NULL;
     }
 }
-
 
 static
 bool isValidIP(const char *ip) {
@@ -170,7 +167,6 @@ bool isValidIP(const char *ip) {
 
     return false;
 }
-
 
 bool 
 isIpAvailable(const char* ip, int port) 
@@ -236,7 +232,6 @@ isIpAvailable(const char* ip, int port)
     return true;
 }
 
-
 static
 void proccessIPS(char **ips, int count, int port)
 {
@@ -247,3 +242,4 @@ void proccessIPS(char **ips, int count, int port)
             printf("IP %s on port %d is not available\n", ips[i], port);
     }
 }
+
