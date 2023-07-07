@@ -1,6 +1,8 @@
 #ifndef SSHFINDER_H
 #define SSHFINDER_H
 
+#define INITIAL_CAPACITY 1
+
 #define MF(p) \
     freemem((void **)&(p))
 
@@ -10,5 +12,6 @@
 
 static void usage(void);
 void freemem(void **pp);
+static int isValidIP(const char *ip);
 
 #endif // SSHFINDER_H

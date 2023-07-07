@@ -3,17 +3,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <arpa/inet.h>
 
 
 #define MAX_RANGE_SIZE 100
 
+// This is for debug and test only
+void
+printIPS(char **ips, int count)
+{
+    for (int i = 0; i < count; i++) {
+	if (!isValidIP(ips[i])) {
+		printf("Invalid IP address: %s\n", ips[i]);
+		exit(EXIT_FAILURE);
+	}
+        printf("IP = %s\n", ips[i]);
+    }
+}
 
-int main(int argc, char *argv[])
+int 
+main(int argc, char *argv[])
 {
     char range[MAX_RANGE_SIZE];
     int port = 22;
     int thread = 10;
     int help_flag = 0;
+
+
+    int capacity = INITIAL_CAPACITY;
+    RAII_VARIABLE(char **,ips,malloc(capacity * sizeof(char *)),MF);
+    int ipCount = 0;
 
     static struct option long_options[] = {
         {"help"   ,   no_argument,       0, 'h'},
@@ -33,8 +52,16 @@ int main(int argc, char *argv[])
 
         switch (option) {
             case 'r':
-                strncpy(range, optarg, MAX_RANGE_SIZE);
-                printf("Range = %s\n", range);
+                char *ipToken = strtok(optarg, ",");
+                while (ipToken != NULL) {
+                    if (ipCount >= capacity) {
+                        capacity *= 2;
+                        ips = realloc(ips, capacity * sizeof(char *));
+                    }
+                    ips[ipCount] = strdup(ipToken);
+                    ipCount++;
+                    ipToken = strtok(NULL, ",");
+                }
                 break;
             case 'p':
                 port = atoi(optarg);
@@ -58,12 +85,14 @@ int main(int argc, char *argv[])
         return EXIT_SUCCESS;
     }
 
+    printIPS(ips, ipCount);
+
     return EXIT_SUCCESS;
 }
 
 
-// Print help and usage message
-static void usage(void)
+static 
+void usage(void)
 {
     printf(
 "Usage information:\n"
@@ -77,10 +106,39 @@ static void usage(void)
 }
 
 
-void freemem(void **pp)
+void 
+freemem(void **pp)
 {
     if (pp != NULL && *pp != NULL) {
         free(*pp);
         *pp = NULL;
     }
 }
+
+
+static
+int isValidIP(const char *ip) {
+    struct sockaddr_in sa;
+    int result = inet_pton(AF_INET, ip, &(sa.sin_addr));
+
+    if (result == 1)
+        return 1;
+    else if (result == 0) {
+        char *slashPos = strchr(ip, '/');
+        if (slashPos != NULL) {
+            *slashPos = '\0';
+            int isValidCIDR = inet_pton(AF_INET, ip, &(sa.sin_addr)) == 1;
+            *slashPos = '/';
+
+            if (isValidCIDR) {
+                int cidr = atoi(slashPos + 1);
+                if (cidr >= 0 && cidr <= 32) {
+                    return 1;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
