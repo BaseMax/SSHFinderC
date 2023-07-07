@@ -70,6 +70,11 @@ Scan a specific IP range with a custom port:
 ./ssh_system_finder -r 192.168.1.0/24 -p 2222
 ```
 
+Scan combination of single IP and IP ranges with custom port:
+```shell
+./ssh_system_finder --range 94.101.184.0/22,5.34.200.25,188.121.112.0/22 --port 2222
+```
+
 ## Contributing
 
 Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request to the GitHub repository.
