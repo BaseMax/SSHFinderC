@@ -20,7 +20,6 @@ main(int argc, char *argv[])
     int thread = 10;
     int help_flag = 0;
 
-
     int capacity = INITIAL_CAPACITY;
     RAII_VARIABLE(char **,ips,malloc(capacity * sizeof(char *)),MF);
     int ipCount = 0;
@@ -113,7 +112,6 @@ main(int argc, char *argv[])
     }
 
     proccessIPS(ips, ipCount, port);
-    
 
     return EXIT_SUCCESS;
 }
@@ -131,7 +129,6 @@ void usage(void)
 "         BaseMax           <basemaxcode@gmail.com>\n"
     );
 }
-
 
 void 
 freemem(void **pp)
@@ -242,4 +239,3 @@ void proccessIPS(char **ips, int count, int port)
             printf("IP %s on port %d is not available\n", ips[i], port);
     }
 }
-
