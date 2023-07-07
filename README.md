@@ -82,4 +82,9 @@ This project is licensed under the GPL-3.0 License.
 
 The SSH System Finder was inspired by the need to identify SSH-enabled systems within a network range efficiently.
 
-Copyright 2023, Max Base, MaximilianEdison
+Authors:
+
+- Maximilian Edison
+- Max Base
+
+Copyright 2023, Max Base
