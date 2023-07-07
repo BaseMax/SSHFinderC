@@ -6,7 +6,6 @@
 #include <arpa/inet.h>
 
 
-#define MAX_RANGE_SIZE 100
 
 // This is for debug and test only
 void
@@ -24,7 +23,6 @@ printIPS(char **ips, int count)
 int 
 main(int argc, char *argv[])
 {
-    char range[MAX_RANGE_SIZE];
     int port = 22;
     int thread = 10;
     int help_flag = 0;
