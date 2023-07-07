@@ -1,17 +1,17 @@
 #include "sshfinder.h"
 
-#include <getopt.h>
+#include <poll.h>
 #include <stdio.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <getopt.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <stdint.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <unistd.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <poll.h>
-#include <stdint.h>
 
 int 
 main(int argc, char *argv[])
