@@ -42,15 +42,23 @@ The SSH System Finder supports the following command-line flags:
 - `-r, --range`: Specifies the IP range or local network to scan. The format can be a single IP address, a range using CIDR notation (e.g., 192.168.1.0/24), or a combination of both (e.g., 192.168.1.0/24,192.168.2.0/24).
 - `-p, --port`: Specifies the port number to scan for SSH services (default is port 22).
 - `-t, --threads`: Specifies the number of concurrent threads to use for scanning (default is 10) -> comming soon :).
-Here's an example command for scanning a local network (192.168.1.0/24) for SSH systems:
-
-```shell
-./ssh_system_finder -r 192.168.1.0/24
-```
+  
 
 The program will output a list of discovered SSH-enabled systems with their corresponding details.
 
 ## Examples
+
+Show help message:
+```shell
+$ ./ssh_system_finder --help
+Usage information:
+        -h     --help          Display the help message and usage information
+        -r     --range         The ip range to scan (ex. 192.168.0.1/24,192.168.2.0/24)
+        -p     --port          The port number to scan for SSH services (default is 22)
+        -t     --threads       The number of concurrent therads to use for scanning (default is 10) -> comming soon :)
+Authors: Maximilian Edison <maximilianedison@gmail.com>
+         BaseMax           <basemaxcode@gmail.com>
+```
 
 Scan a specific IP address for SSH services:
 
