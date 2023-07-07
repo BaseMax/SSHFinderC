@@ -10,6 +10,8 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <poll.h>
+#include <stdint.h>
+
 
 
 int 
@@ -52,7 +54,7 @@ main(int argc, char *argv[])
                                     ipToken);
                             exit(EXIT_FAILURE);
                         } else {
-                            
+                           // Implement handling of ip CIDR notation here
                         }
                     } else {
                         if (!isValidIP(ipToken)) {
