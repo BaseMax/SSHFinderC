@@ -126,7 +126,7 @@ void usage(void)
 "\t-p     --port          The port number to scan for SSH services (default is 22)\n"
 "\t-t     --threads       The number of concurrent therads to use for scanning (default is 10) -> comming soon :)\n"
 "Authors: Maximilian Edison <maximilianedison@gmail.com>\n"
-"         BaseMax           <basemaxcode@gmail.com>\n"
+"         BaseMax           <maxbasecode@gmail.com>\n"
     );
 }
 
