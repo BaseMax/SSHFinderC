@@ -1,3 +1,5 @@
+# Maintainer: Maximilian Edison <maximilianedison at gmail dot com>
+# Maintainer: Max Base <maxbasecode at gmail dot com>
 pkgname="ssh_system_finder"
 pkgver="1.0.0"
 pkgrel="1.0"
@@ -7,8 +9,6 @@ url="https://github.com/basemax/sshfinderc"
 license=('GPL3')
 depends=('gcc' 'make')
 makedepends=('git')
-maintainer=("Maximilian Edison <maximilianedison@gmail.com>"
-            "Base Max <basemaxcode@gmail.com")
 source=("git+$url.git")
 md5sums=('SKIP')
 
