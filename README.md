@@ -57,7 +57,7 @@ Usage information:
         -p     --port          The port number to scan for SSH services (default is 22)
         -t     --threads       The number of concurrent therads to use for scanning (default is 10) -> comming soon :)
 Authors: Maximilian Edison <maximilianedison@gmail.com>
-         BaseMax           <basemaxcode@gmail.com>
+         BaseMax           <maxbasecode@gmail.com>
 ```
 
 Scan a specific IP address for SSH services:
